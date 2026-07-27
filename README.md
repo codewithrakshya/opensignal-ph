@@ -3,6 +3,10 @@
 OpenSignal PH is an open-source public-health safety surveillance platform for
 reproducible adverse-event signal detection and evaluation.
 
+For a nontechnical explanation of the problem, novelty, intended users,
+benefits, workflow, AI/ML boundaries, and limitations, see
+[OpenSignal PH: purpose, novelty, users, and workflow](docs/project-overview.md).
+
 The project uses public FDA adverse-event data as its first use case. It is a
 research and engineering tool—not a clinical decision system. A report or
 statistical signal does not establish that a product caused an event, and the
