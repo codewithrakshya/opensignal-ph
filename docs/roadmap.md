@@ -3,6 +3,10 @@
 The roadmap favors small, validated vertical slices. A phase is complete only
 when its outputs are reproducible, tested, and documented.
 
+The [system design and research guide](system-design-and-research-guide.md)
+explains how these phases fit together and groups the remaining ideas by
+scientific, researcher-experience, validation, and production priority.
+
 ## Phase 0 — Foundation
 
 **Goal:** establish architecture and developer contracts.

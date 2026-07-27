@@ -1,5 +1,10 @@
 # OpenSignal PH: purpose, novelty, users, and workflow
 
+This page is the short conceptual introduction. The
+[system design and research guide](system-design-and-research-guide.md)
+contains the complete technical design, current implementation status, and
+prioritized remaining work.
+
 ## Executive summary
 
 OpenSignal PH is a public-health safety-surveillance platform that helps
@@ -272,4 +277,3 @@ OpenSignal PH succeeds when it:
 - never allows generated text to alter the detector decision;
 - abstains when evidence is insufficient;
 - keeps final interpretation and accountability with qualified humans.
-

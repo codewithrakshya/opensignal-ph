@@ -1,5 +1,8 @@
 # Portfolio walkthrough
 
+For the full technical and research explanation behind this demonstration, see
+the [system design and research guide](system-design-and-research-guide.md).
+
 ## Sixty-second demonstration
 
 1. Open the signal queue and select **SEMAGLUTIDE — ILEUS**.
@@ -51,4 +54,3 @@ leakage-resistant backtesting, and generates citation-validated AI evidence
 briefs with safe abstention. Delivered through FastAPI and an accessible review
 dashboard with lineage, observability, role-aware audit events, CI, SBOM
 generation, and reproducible deployment.
-

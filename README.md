@@ -6,6 +6,9 @@ reproducible adverse-event signal detection and evaluation.
 For a nontechnical explanation of the problem, novelty, intended users,
 benefits, workflow, AI/ML boundaries, and limitations, see
 [OpenSignal PH: purpose, novelty, users, and workflow](docs/project-overview.md).
+For the complete architecture, research workflow, automation model, safety
+boundaries, current status, and prioritized remaining work, see the
+[system design and research guide](docs/system-design-and-research-guide.md).
 
 The project uses public FDA adverse-event data as its first use case. It is a
 research and engineering tool—not a clinical decision system. A report or
