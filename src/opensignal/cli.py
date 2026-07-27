@@ -7,6 +7,7 @@ from pathlib import Path
 
 from opensignal.backtesting.pipeline import BacktestPipeline
 from opensignal.core.config import get_settings
+from opensignal.demo import run_portfolio_demo
 from opensignal.detection.pipeline import OpenFDAScoringPipeline
 from opensignal.evidence.pipeline import EvidenceBriefingPipeline
 from opensignal.evidence.providers import (
@@ -91,6 +92,15 @@ def build_parser() -> argparse.ArgumentParser:
         "--provider",
         choices=["template", "openai"],
         default="template",
+    )
+    demo = commands.add_parser(
+        "demo",
+        help="Run the synthetic end-to-end portfolio demonstration",
+    )
+    demo.add_argument(
+        "--evidence-set",
+        type=Path,
+        default=Path("evidence_sets/fda-demo-v1.json"),
     )
     return parser
 
@@ -228,4 +238,15 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.evidence_set,
             args.provider,
         )
+    if args.command == "demo":
+        result = run_portfolio_demo(
+            get_settings().data_dir,
+            args.evidence_set,
+        )
+        print(json.dumps(asdict(result), sort_keys=True))
+        return 0
     raise AssertionError(f"Unhandled command: {args.command}")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

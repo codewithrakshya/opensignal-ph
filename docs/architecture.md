@@ -88,6 +88,15 @@ backtest endpoints. The separate `dashboard/` application implements the human
 review contract and can consume these APIs without querying analytical storage
 directly. Its deployed portfolio mode uses explicit demonstration fixtures.
 
+### Operations and review
+
+The API emits structured request logs, a request identifier, Prometheus-format
+request counters, and separate liveness and storage-readiness endpoints.
+Role-gated review decisions are append-only events whose previous-log digest
+makes rewriting detectable. The portfolio uses filesystem artifacts so every
+contract stays inspectable; a production deployment would map the same
+contracts to managed object storage and an identity-backed operational store.
+
 ## Trust boundaries
 
 - Secrets enter through environment variables and are never committed.

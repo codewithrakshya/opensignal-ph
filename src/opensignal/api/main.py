@@ -3,10 +3,12 @@ from fastapi import FastAPI
 from opensignal import __version__
 from opensignal.api.backtests import router as backtests_router
 from opensignal.api.briefs import router as briefs_router
+from opensignal.api.operations import router as operations_router
 from opensignal.api.signals import router as signals_router
 from opensignal.api.temporal import router as temporal_router
 from opensignal.core.config import get_settings
 from opensignal.core.models import HealthResponse
+from opensignal.operations.observability import observe_request
 
 settings = get_settings()
 
@@ -22,6 +24,8 @@ app.include_router(signals_router)
 app.include_router(temporal_router)
 app.include_router(backtests_router)
 app.include_router(briefs_router)
+app.include_router(operations_router)
+app.middleware("http")(observe_request)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["operations"])

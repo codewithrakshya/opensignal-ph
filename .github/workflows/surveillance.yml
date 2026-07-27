@@ -1,0 +1,27 @@
+name: Scheduled surveillance demonstration
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 9 1 * *"
+
+permissions:
+  contents: read
+
+jobs:
+  demo-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -e ".[ml]"
+      - run: ./scripts/run-demo.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opensignal-demo-artifacts
+          path: data/analytics/openfda/portfolio-demo
+          retention-days: 30
+

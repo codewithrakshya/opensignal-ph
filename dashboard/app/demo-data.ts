@@ -12,6 +12,37 @@ export type Signal = {
   quarter: string;
   trend: number[];
   reasons: string[];
+  brief: EvidenceBrief;
+};
+
+export type EvidenceBrief = {
+  status: "generated" | "abstained";
+  headline: string;
+  claims: { text: string; citationIds: string[] }[];
+  uncertainty: string;
+  reviewSteps: string[];
+  citations: {
+    id: string;
+    title: string;
+    publisher: string;
+    url: string;
+  }[];
+  provider: string;
+  model: string;
+};
+
+const fdaDashboard = {
+  id: "fda-faers-dashboard",
+  title: "FDA Adverse Event Reporting System Public Dashboard",
+  publisher: "U.S. Food and Drug Administration",
+  url: "https://www.fda.gov/drugs/questions-and-answers-fdas-adverse-event-reporting-system-faers/fda-adverse-event-reporting-system-faers-public-dashboard",
+};
+
+const fdaSignals = {
+  id: "fda-potential-signals",
+  title: "Potential Signals of Serious Risks and New Safety Information",
+  publisher: "U.S. Food and Drug Administration",
+  url: "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/potential-signals-serious-risksnew-safety-information-identified-fda-adverse-event-reporting-system-faers",
 };
 
 export const signals: Signal[] = [
@@ -33,6 +64,29 @@ export const signals: Signal[] = [
       "Report count is 4.1 robust deviations above prior history",
       "Signal is stable at 37 target reports",
     ],
+    brief: {
+      status: "generated",
+      headline: "Two FDA sources are available for structured expert review.",
+      claims: [
+        {
+          text: "FAERS reports are surveillance inputs and do not establish that a medicine caused an event.",
+          citationIds: [fdaDashboard.id],
+        },
+        {
+          text: "FDA evaluates potential safety signals with additional available evidence before deciding whether monitoring or regulatory action is appropriate.",
+          citationIds: [fdaSignals.id],
+        },
+      ],
+      uncertainty:
+        "Reporting patterns cannot estimate incidence and may reflect duplication, stimulated reporting, confounding, or incomplete clinical context.",
+      reviewSteps: [
+        "Inspect the cited FDA records and current prescribing information.",
+        "Assess duplicates, exposure, confounding, and temporal sequence.",
+      ],
+      citations: [fdaDashboard, fdaSignals],
+      provider: "Template baseline",
+      model: "deterministic-v1",
+    },
   },
   {
     id: "dupilumab-ocular",
@@ -52,6 +106,25 @@ export const signals: Signal[] = [
       "Quarter-over-quarter growth is 61%",
       "Serious-report proportion increased to 62%",
     ],
+    brief: {
+      status: "generated",
+      headline: "FDA surveillance context retrieved for expert review.",
+      claims: [
+        {
+          text: "The FDA public dashboard provides report-level surveillance context for medicines and adverse events.",
+          citationIds: [fdaDashboard.id],
+        },
+      ],
+      uncertainty:
+        "The retrieved source does not resolve causality, frequency, clinical severity, or alternative explanations.",
+      reviewSteps: [
+        "Review the case series and current label.",
+        "Compare reporting changes with utilization and reporting context.",
+      ],
+      citations: [fdaDashboard],
+      provider: "Template baseline",
+      model: "deterministic-v1",
+    },
   },
   {
     id: "topiramate-hypersensitivity",
@@ -71,6 +144,22 @@ export const signals: Signal[] = [
       "Count growth is elevated but below change threshold",
       "No Isolation Forest anomaly in the current quarter",
     ],
+    brief: {
+      status: "generated",
+      headline: "One FDA surveillance source is available.",
+      claims: [
+        {
+          text: "FAERS is designed to support post-market safety surveillance and hypothesis generation.",
+          citationIds: [fdaDashboard.id],
+        },
+      ],
+      uncertainty:
+        "No source in this demonstration establishes a causal relationship or a population rate.",
+      reviewSteps: ["Review the cited source and current product label."],
+      citations: [fdaDashboard],
+      provider: "Template baseline",
+      model: "deterministic-v1",
+    },
   },
   {
     id: "dexmedetomidine-di",
@@ -90,6 +179,19 @@ export const signals: Signal[] = [
       "Sparse contingency table creates a wide interval",
       "Statistical stability rule is not met",
     ],
+    brief: {
+      status: "abstained",
+      headline: "Evidence brief unavailable",
+      claims: [],
+      uncertainty:
+        "No sufficiently relevant document was retrieved for this sparse signal.",
+      reviewSteps: [
+        "Perform manual terminology and literature review before interpretation.",
+      ],
+      citations: [],
+      provider: "Template baseline",
+      model: "deterministic-v1",
+    },
   },
 ];
 

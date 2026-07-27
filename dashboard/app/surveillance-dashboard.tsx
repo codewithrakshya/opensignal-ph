@@ -91,6 +91,7 @@ export function SurveillanceDashboard() {
         </a>
         <nav aria-label="Primary navigation">
           <a className="active" href="#signals">Signals</a>
+          <a href="#brief">Evidence brief</a>
           <a href="#quality">Data quality</a>
           <a href="#evaluation">Evaluation</a>
         </nav>
@@ -220,6 +221,55 @@ export function SurveillanceDashboard() {
               </ol>
             </div>
 
+            <section className="brief-card" id="brief" aria-labelledby="brief-title">
+              <div className="brief-heading">
+                <div>
+                  <p className="eyebrow">Constrained AI assistance</p>
+                  <h3 id="brief-title">Evidence brief</h3>
+                </div>
+                <span className={`brief-state brief-${selected.brief.status}`}>
+                  {selected.brief.status === "generated" ? "Citations verified" : "Abstained"}
+                </span>
+              </div>
+              <strong className="brief-headline">{selected.brief.headline}</strong>
+              {selected.brief.claims.map((claim) => (
+                <p className="brief-claim" key={claim.text}>
+                  {claim.text}{" "}
+                  {claim.citationIds.map((citationId) => (
+                    <a href={`#${citationId}`} key={citationId}>
+                      [{selected.brief.citations.findIndex((item) => item.id === citationId) + 1}]
+                    </a>
+                  ))}
+                </p>
+              ))}
+              <div className="uncertainty">
+                <strong>Uncertainty</strong>
+                <span>{selected.brief.uncertainty}</span>
+              </div>
+              <ol className="review-steps">
+                {selected.brief.reviewSteps.map((step) => <li key={step}>{step}</li>)}
+              </ol>
+              {selected.brief.citations.length > 0 && (
+                <div className="citations">
+                  {selected.brief.citations.map((citation, index) => (
+                    <a
+                      id={citation.id}
+                      href={citation.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      key={citation.id}
+                    >
+                      <span>{index + 1}</span>
+                      <span><strong>{citation.title}</strong><small>{citation.publisher}</small></span>
+                    </a>
+                  ))}
+                </div>
+              )}
+              <p className="brief-meta">
+                {selected.brief.provider} · {selected.brief.model} · generated text cannot change scores
+              </p>
+            </section>
+
             <div className="provenance">
               <span>Evidence provenance</span>
               <dl>
@@ -285,6 +335,30 @@ export function SurveillanceDashboard() {
               Reference agreement is not clinical validation.
             </p>
           </article>
+        </section>
+
+        <section className="platform-card" aria-labelledby="platform-title">
+          <div>
+            <p className="eyebrow">Production architecture</p>
+            <h2 id="platform-title">One traceable path from source to review.</h2>
+            <p>
+              Every stage saves a versioned artifact and digest. Statistical and
+              temporal models rank signals; the evidence layer can only summarize
+              retrieved sources and must abstain when grounding fails.
+            </p>
+          </div>
+          <div className="architecture-flow" aria-label="Platform data flow">
+            {["Public APIs", "Quality gates", "ROR · PRR", "Temporal ML", "Cited brief", "Expert review"].map(
+              (stage, index) => (
+                <div key={stage}><span>{String(index + 1).padStart(2, "0")}</span><strong>{stage}</strong></div>
+              ),
+            )}
+          </div>
+          <div className="operations">
+            <span><strong>Ready</strong> API health and readiness probes</span>
+            <span><strong>Audited</strong> append-only review events</span>
+            <span><strong>Reproducible</strong> seeded models and source hashes</span>
+          </div>
         </section>
       </div>
 

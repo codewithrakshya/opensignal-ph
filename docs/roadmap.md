@@ -139,11 +139,15 @@ immutability tests. See ADR 0010.
 
 **Goal:** demonstrate production operations.
 
-- scheduled orchestration;
-- structured logs, metrics, and readiness checks;
-- database migrations and retention policy;
-- role-aware review workflow and audit events;
-- software bill of materials and dependency scanning;
-- deployment documentation and recovery exercise.
+- [x] scheduled orchestration;
+- [x] structured logs, metrics, and readiness checks;
+- [x] versioned artifact schemas and retention policy;
+- [x] role-aware review workflow and chained audit events;
+- [x] software bill of materials and dependency scanning;
+- [x] deployment documentation and recovery exercise.
 
 **Exit criteria:** a documented release can be deployed, monitored, and restored.
+
+**Status:** Portfolio release complete. Trusted role headers and filesystem
+artifacts are explicit demonstration implementations; production deployment
+must replace them with identity-provider claims and managed durable storage.

@@ -341,5 +341,19 @@ GET /briefs/openfda/<snapshot-id>?drug=<drug>&event=<event>
 
 ## Project status
 
-Phases 0–7 are implemented. Phase 8 will add platform hardening, observability,
-scheduled orchestration, and recovery documentation.
+Phases 0–8 are implemented as a portfolio release. The dashboard includes
+cited evidence briefs and visible abstention, while the API provides health and
+readiness probes, structured request logs, metrics, and role-aware review audit
+events.
+
+Run the complete synthetic, non-clinical demonstration with:
+
+```bash
+pip install -e '.[ml]'
+opensignal demo
+```
+
+This produces statistical scores, temporal ML artifacts, and a grounded
+evidence brief under `data/analytics/openfda/portfolio-demo`. See
+`docs/portfolio-walkthrough.md` for the interview demonstration and
+`docs/operations.md` for scheduling, retention, audit, and recovery guidance.
