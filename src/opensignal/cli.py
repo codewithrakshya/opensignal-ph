@@ -8,6 +8,11 @@ from pathlib import Path
 from opensignal.backtesting.pipeline import BacktestPipeline
 from opensignal.core.config import get_settings
 from opensignal.detection.pipeline import OpenFDAScoringPipeline
+from opensignal.evidence.pipeline import EvidenceBriefingPipeline
+from opensignal.evidence.providers import (
+    OpenAIResponsesBriefProvider,
+    TemplateBriefProvider,
+)
 from opensignal.ingestion.manifest import IngestionManifest
 from opensignal.ingestion.openfda import OpenFDAClient
 from opensignal.ingestion.runner import OpenFDAIngestionRunner
@@ -73,6 +78,20 @@ def build_parser() -> argparse.ArgumentParser:
     backtest.add_argument("--snapshot-id", required=True)
     backtest.add_argument("--reference-set", type=Path, required=True)
     backtest.add_argument("--k", type=int, default=10)
+    brief = commands.add_parser(
+        "brief",
+        help="Generate a cited, fail-closed evidence brief",
+    )
+    brief.add_argument("--source", choices=["openfda"], default="openfda")
+    brief.add_argument("--snapshot-id", required=True)
+    brief.add_argument("--drug", required=True)
+    brief.add_argument("--event", required=True)
+    brief.add_argument("--evidence-set", type=Path, required=True)
+    brief.add_argument(
+        "--provider",
+        choices=["template", "openai"],
+        default="template",
+    )
     return parser
 
 
@@ -158,6 +177,32 @@ def backtest(
     return 0
 
 
+def brief(
+    source: str,
+    snapshot_id: str,
+    drug: str,
+    event: str,
+    evidence_set: Path,
+    provider_name: str,
+) -> int:
+    settings = get_settings()
+    if source != "openfda":
+        raise ValueError(f"Unsupported briefing source: {source}")
+    provider = (
+        OpenAIResponsesBriefProvider(settings.brief_model)
+        if provider_name == "openai"
+        else TemplateBriefProvider()
+    )
+    result = EvidenceBriefingPipeline(settings.data_dir, provider).run(
+        snapshot_id,
+        drug=drug,
+        event=event,
+        evidence_set=evidence_set,
+    )
+    print(json.dumps(asdict(result), sort_keys=True))
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "ingest":
@@ -173,5 +218,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "backtest":
         return backtest(
             args.source, args.snapshot_id, args.reference_set, args.k
+        )
+    if args.command == "brief":
+        return brief(
+            args.source,
+            args.snapshot_id,
+            args.drug,
+            args.event,
+            args.evidence_set,
+            args.provider,
         )
     raise AssertionError(f"Unhandled command: {args.command}")

@@ -314,7 +314,32 @@ OpenSignal PH identifies reporting patterns that may warrant further review.
 It does not determine causality, recommend treatment, estimate adverse-event
 incidence, or replace review by pharmacovigilance and clinical experts.
 
+## Phase 7 evidence briefing
+
+Generate a deterministic, cited evidence brief without an account or API key:
+
+```bash
+opensignal brief \
+  --snapshot-id <snapshot-id> \
+  --drug "DRUG A" \
+  --event "EVENT X" \
+  --evidence-set evidence_sets/fda-demo-v1.json
+```
+
+The optional `--provider openai` path requires `pip install -e '.[ai]'` and an
+`OPENAI_API_KEY`; a ChatGPT subscription is neither required nor used. Both
+providers write a separate artifact under `data/analytics/.../briefs/`.
+Validation rejects unknown citations and causal, safety, or treatment claims,
+then fails closed to an explicit abstention. The signal artifact is read-only
+and its SHA-256 digest is recorded in every brief.
+
+Saved briefs are available from:
+
+```text
+GET /briefs/openfda/<snapshot-id>?drug=<drug>&event=<event>
+```
+
 ## Project status
 
-Phases 0–6 are implemented. Phase 7 will add constrained, cited,
-AI-assisted evidence briefing without allowing generated text to alter scores.
+Phases 0–7 are implemented. Phase 8 will add platform hardening, observability,
+scheduled orchestration, and recovery documentation.

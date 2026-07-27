@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     socrata_max_attempts: int = 4
     socrata_backoff_seconds: float = 1.0
     data_dir: Path = Path("data")
+    brief_model: str = "gpt-5.6"
 
 
 @lru_cache

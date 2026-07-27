@@ -1,0 +1,18 @@
+[
+  {
+    "document_id": "fda-faers-overview",
+    "title": "FDA Adverse Event Reporting System (FAERS) Public Dashboard",
+    "publisher": "U.S. Food and Drug Administration",
+    "url": "https://www.fda.gov/drugs/questions-and-answers-fdas-adverse-event-reporting-system-faers/fda-adverse-event-reporting-system-faers-public-dashboard",
+    "published_date": "2025-06-30",
+    "content": "FAERS contains adverse-event reports for medicines. A report does not establish that a medicine caused an event, and reporting rates cannot estimate incidence."
+  },
+  {
+    "document_id": "fda-label-review-process",
+    "title": "Potential Signals of Serious Risks and New Safety Information",
+    "publisher": "U.S. Food and Drug Administration",
+    "url": "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/potential-signals-serious-risksnew-safety-information-identified-fda-adverse-event-reporting-system-faers",
+    "published_date": "2025-09-30",
+    "content": "FDA evaluates potential medicine safety signals using available information and may decide that regulatory action or further monitoring is appropriate."
+  }
+]

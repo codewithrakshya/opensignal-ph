@@ -123,14 +123,17 @@ portfolio deployment is explicitly labeled as a demonstration.
 
 **Goal:** reduce review effort without delegating safety decisions.
 
-- retrieve relevant FDA notices and labels;
-- structured, cited evidence summaries;
-- constrained templates and abstention;
-- evaluation of citation correctness and unsupported claims;
-- clear separation from statistical and ML scoring.
+- [x] retrieve relevant FDA notices and labels;
+- [x] structured, cited evidence summaries;
+- [x] constrained templates and abstention;
+- [x] evaluation of citation correctness and unsupported claims;
+- [x] clear separation from statistical and ML scoring.
 
 **Exit criteria:** summaries pass a documented evaluation set and never alter
 the underlying signal decision.
+
+Completed with automated citation, abstention, unsafe-language, and artifact
+immutability tests. See ADR 0010.
 
 ## Phase 8 — Platform hardening
 
