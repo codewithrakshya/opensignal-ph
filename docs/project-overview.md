@@ -67,8 +67,8 @@ The output is a review priority—not a medical conclusion.
 
 Individual parts of the project are not new by themselves. FAERS dashboards,
 ROR/PRR calculations, anomaly-detection models, and retrieval-augmented
-summaries already exist. The novelty is the way OpenSignal PH combines them
-into one evidence-first, safety-constrained, reproducible workflow.
+summaries already exist. The contribution is how OpenSignal PH connects them
+while keeping the safety controls and analytical history visible.
 
 ### 1. Statistical and ML agreement is visible
 
@@ -259,7 +259,7 @@ the review workflow can be examined safely and consistently. The repository
 contains the working Python ingestion, quality, scoring, temporal ML,
 backtesting, briefing, API, testing, and operations code.
 
-The included synthetic end-to-end demonstration can regenerate statistical
+The included synthetic demonstration can regenerate statistical
 scores, temporal ML artifacts, and a cited evidence brief without downloading
 the full FAERS dataset. Live institutional monitoring would require a separately
 hosted API, scheduled governed ingestion, persistent storage, and approved

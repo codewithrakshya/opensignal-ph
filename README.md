@@ -320,8 +320,8 @@ GET /backtests/openfda/<snapshot-id>/<reference-set-id>
 
 ## Phase 6 surveillance interface
 
-The `dashboard/` application turns the saved analytical contracts into an
-evidence-first review workspace. It includes:
+The `dashboard/` application presents the saved analytical results for review.
+It includes:
 
 - a searchable, status-filtered signal queue;
 - quarterly trend and confidence-interval context;

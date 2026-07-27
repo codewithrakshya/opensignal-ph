@@ -2,8 +2,8 @@
 
 ## 1. What the system is
 
-OpenSignal PH is an evidence-first surveillance and research platform for
-finding adverse-event **reporting patterns** that may deserve expert review.
+OpenSignal PH is a surveillance and research platform for finding
+adverse-event **reporting patterns** that may deserve expert review.
 Its primary use case is the FDA Adverse Event Reporting System (FAERS), a
 spontaneous reporting system containing reports submitted by patients,
 clinicians, manufacturers, and others.
@@ -112,7 +112,7 @@ This makes the project particularly relevant to platform-oriented public-sector
 data science: it focuses on whether analysis can be trusted, repeated,
 operated, and reviewed—not only whether a model can be trained.
 
-## 5. End-to-end system design
+## 5. System design
 
 ```mermaid
 flowchart TB
@@ -169,8 +169,8 @@ snapshots are not silently overwritten.
 
 ### 5.3 Validation, deduplication, and normalization
 
-Typed permissive source contracts accommodate real-world missingness while
-still rejecting structurally unusable records. For FAERS:
+Typed source contracts allow expected missing values while still rejecting
+structurally unusable records. For FAERS:
 
 - the highest report version is retained for a case;
 - older follow-ups and exact duplicates are classified explicitly;
@@ -354,7 +354,7 @@ Implemented:
 - immutable raw snapshots and checkpoints;
 - typed validation, deduplication, normalization, and quality reports;
 - ROR and PRR scoring;
-- temporal Isolation Forest and robust change detection;
+- temporal Isolation Forest and median/MAD change detection;
 - walk-forward evaluation contracts;
 - citation-constrained evidence briefs and abstention;
 - API, dashboard, lineage, observability, and review audit;

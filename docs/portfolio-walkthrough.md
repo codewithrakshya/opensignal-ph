@@ -42,15 +42,14 @@ flowchart LR
   and alert burden.
 - Brief evaluation covers citation availability, unsupported citations,
   unsafe causal language, abstention, and signal-artifact immutability.
-- The release suite includes API, CLI, quality, ingestion, analytics, and
-  end-to-end demonstration tests.
+- The release suite tests the API, CLI, quality checks, ingestion, analytics,
+  and complete demonstration workflow.
 
-## Résumé description
+## Implementation summary
 
-Built an evidence-first public-health safety surveillance platform that ingests
-versioned openFDA and CDC data, enforces typed quality contracts, calculates
-ROR/PRR signals, applies explainable temporal anomaly detection, performs
-leakage-resistant backtesting, and generates citation-validated AI evidence
-briefs with safe abstention. Delivered through FastAPI and an accessible review
-dashboard with lineage, observability, role-aware audit events, CI, SBOM
-generation, and reproducible deployment.
+The software ingests versioned openFDA and CDC data, applies typed quality
+checks, calculates ROR and PRR, detects temporal anomalies, and evaluates the
+methods with walk-forward backtesting. Evidence briefs are checked for source
+citations and return an abstention when the available material is insufficient.
+FastAPI and the dashboard expose saved results, their analytical history, data
+quality, and review audit events.
