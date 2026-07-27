@@ -1,0 +1,79 @@
+# Architecture
+
+## Design goals
+
+OpenSignal PH is designed around capabilities that can be reused for additional
+public-health surveillance sources:
+
+1. reproducible acquisition;
+2. explicit schemas and data contracts;
+3. observable transformation and quality;
+4. interchangeable analytics;
+5. time-aware evaluation;
+6. explainable delivery.
+
+## Components
+
+### Source adapters
+
+Each source adapter retrieves bounded pages, records retrieval metadata, obeys
+rate limits, and supports resumable checkpoints. Source-specific representations
+must not leak beyond the ingestion boundary.
+
+### Data layers
+
+- **Raw:** immutable source payloads plus retrieval metadata.
+- **Validated:** typed records that passed structural checks; rejected records
+  are retained with reasons.
+- **Curated:** normalized drug, reaction, case, outcome, and reporting-period
+  entities.
+- **Analytics:** aggregate contingency tables, detector scores, alerts, and
+  backtest results.
+
+### Quality service
+
+Quality checks produce data, not only log messages. Results include freshness,
+completeness, validity, uniqueness, volume, and distribution checks and are
+available to both the API and dashboard.
+
+### Detector interface
+
+Every statistical or ML method accepts a defined analysis window and produces
+a `SignalScore`. Detectors must explain their output and declare the minimum
+data they require. The first implementation is reporting odds ratio (ROR).
+
+### Signal registry
+
+The future registry will store detector version, feature window, source snapshot,
+score, threshold decision, explanation, and review status. This enables
+reproducible comparison across methods and quarters.
+
+### Backtesting
+
+Backtests use only data available at the simulated decision date. FDA-published
+quarterly potential signals act as an external evaluation reference, not as
+proof of causal association.
+
+### Delivery
+
+FastAPI provides health, metadata, quality, and signal endpoints. A dashboard
+will consume the API rather than query storage directly.
+
+## Trust boundaries
+
+- Secrets enter through environment variables and are never committed.
+- Raw public records remain separate from derived analytics.
+- Generated summaries cannot alter detector scores.
+- AI-generated text must cite its input evidence and must support abstention.
+- The interface must label all outputs as potential reporting signals.
+
+## Initial technology choices
+
+- Python for ingestion, analytics, and API services
+- Parquet for versioned analytical artifacts
+- DuckDB for local analytical queries
+- PostgreSQL later for operational signal metadata
+- FastAPI for a typed, documented service
+- scikit-learn for initial ML baselines
+- Docker Compose for reproducible local operation
+- GitHub Actions for continuous validation
