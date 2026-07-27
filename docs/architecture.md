@@ -74,9 +74,12 @@ reproducible comparison across methods and quarters.
 
 ### Backtesting
 
-Backtests use only data available at the simulated decision date. FDA-published
+Backtests use only data available at the simulated decision date. Statistical
+baselines rank the current quarter, while Isolation Forest is refit from
+strictly earlier rows before scoring each simulated quarter. FDA-published
 quarterly potential signals act as an external evaluation reference, not as
-proof of causal association.
+proof of causal association. Original FDA text and explicit exact, manual, or
+unmatched normalization decisions remain in the versioned reference set.
 
 ### Delivery
 

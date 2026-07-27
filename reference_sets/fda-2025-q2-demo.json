@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "reference_set_id": "fda-2025-q2-demo-v1",
+  "title": "FDA April-June 2025 potential signals demonstration subset",
+  "publisher": "U.S. Food and Drug Administration",
+  "retrieved_at": "2026-07-27T00:00:00Z",
+  "entries": [
+    {
+      "reference_id": "fda-2025q2-acetaminophen-anaphylaxis",
+      "signal_quarter": "2025-Q2",
+      "product_text": "Acetaminophen-containing products",
+      "risk_text": "Anaphylactic reaction",
+      "normalized_drug": "ACETAMINOPHEN",
+      "normalized_event": "ANAPHYLACTIC REACTION",
+      "match_method": "manual",
+      "match_notes": "Product-class text mapped to the generic ingredient and normalized reaction term.",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/april-june-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse"
+    },
+    {
+      "reference_id": "fda-2025q2-flutemetamol-anaphylaxis",
+      "signal_quarter": "2025-Q2",
+      "product_text": "Vizamyl (flutemetamol F18 injection)",
+      "risk_text": "Anaphylactic reaction",
+      "normalized_drug": "FLUTEMETAMOL F18",
+      "normalized_event": "ANAPHYLACTIC REACTION",
+      "match_method": "manual",
+      "match_notes": "Brand text mapped to the active ingredient shown by FDA.",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/april-june-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse"
+    },
+    {
+      "reference_id": "fda-2025q2-glp1-obstruction",
+      "signal_quarter": "2025-Q2",
+      "product_text": "Glucagon-like peptide-1 (GLP-1) receptor agonists",
+      "risk_text": "Intestinal obstruction and fecal impaction",
+      "normalized_drug": null,
+      "normalized_event": null,
+      "match_method": "unmatched",
+      "match_notes": "A product-class signal maps to multiple ingredients and event terms; excluded pending a versioned one-to-many mapping policy.",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/april-june-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse"
+    }
+  ]
+}

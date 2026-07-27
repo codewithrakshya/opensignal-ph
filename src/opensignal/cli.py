@@ -5,6 +5,7 @@ from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
 
+from opensignal.backtesting.pipeline import BacktestPipeline
 from opensignal.core.config import get_settings
 from opensignal.detection.pipeline import OpenFDAScoringPipeline
 from opensignal.ingestion.manifest import IngestionManifest
@@ -64,6 +65,14 @@ def build_parser() -> argparse.ArgumentParser:
     )
     temporal.add_argument("--source", choices=["openfda"], default="openfda")
     temporal.add_argument("--snapshot-id", required=True)
+    backtest = commands.add_parser(
+        "backtest",
+        help="Run leakage-resistant walk-forward detector evaluation",
+    )
+    backtest.add_argument("--source", choices=["openfda"], default="openfda")
+    backtest.add_argument("--snapshot-id", required=True)
+    backtest.add_argument("--reference-set", type=Path, required=True)
+    backtest.add_argument("--k", type=int, default=10)
     return parser
 
 
@@ -133,6 +142,22 @@ def temporal(source: str, snapshot_id: str) -> int:
     return 0
 
 
+def backtest(
+    source: str,
+    snapshot_id: str,
+    reference_set: Path,
+    k: int,
+) -> int:
+    settings = get_settings()
+    if source != "openfda":
+        raise ValueError(f"Unsupported backtest source: {source}")
+    result = BacktestPipeline(settings.data_dir, k=k).run(
+        snapshot_id, reference_set
+    )
+    print(json.dumps(asdict(result), sort_keys=True))
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "ingest":
@@ -145,4 +170,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         return score(args.source, args.snapshot_id)
     if args.command == "temporal":
         return temporal(args.source, args.snapshot_id)
+    if args.command == "backtest":
+        return backtest(
+            args.source, args.snapshot_id, args.reference_set, args.k
+        )
     raise AssertionError(f"Unhandled command: {args.command}")

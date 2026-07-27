@@ -93,13 +93,16 @@ saved scores under automated tests.
 
 **Goal:** evaluate practical early-warning value.
 
-- versioned FDA quarterly signal reference set;
-- walk-forward evaluation using only prior information;
-- recall@K, precision@K, median lead time, and alert burden;
-- comparisons between counts, ROR, PRR, and ML;
-- documented matching uncertainty between FDA terms and normalized terms.
+- [x] versioned FDA quarterly signal reference contract and audited demo subset;
+- [x] walk-forward evaluation using only prior information;
+- [x] recall@K, precision@K, median lead time, and alert burden;
+- [x] comparisons between counts, ROR, PRR, and ML;
+- [x] documented matching uncertainty between FDA terms and normalized terms.
 
-**Exit criteria:** a single command regenerates the evaluation report.
+**Status:** Complete. A single command regenerates rankings, quarterly metrics,
+summary measures, and lineage metadata. The checked-in FDA subset demonstrates
+the contract; expanding and independently reviewing reference coverage remains
+required before interpreting benchmark values.
 
 ## Phase 6 — Surveillance interface
 

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from opensignal import __version__
+from opensignal.api.backtests import router as backtests_router
 from opensignal.api.signals import router as signals_router
 from opensignal.api.temporal import router as temporal_router
 from opensignal.core.config import get_settings
@@ -18,6 +19,7 @@ app = FastAPI(
 )
 app.include_router(signals_router)
 app.include_router(temporal_router)
+app.include_router(backtests_router)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["operations"])

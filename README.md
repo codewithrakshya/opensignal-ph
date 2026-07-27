@@ -239,6 +239,49 @@ GET /temporal-signals/openfda/<snapshot-id>?anomalies_only=true
 GET /temporal-signals/openfda/<snapshot-id>?changes_only=true
 ```
 
+## Phase 5 walk-forward backtesting
+
+Evaluate all four ranking methods against a versioned reference set:
+
+```bash
+opensignal backtest \
+  --source openfda \
+  --snapshot-id demo-serious-reports-2024 \
+  --reference-set reference_sets/fda-2025-q2-demo.json \
+  --k 10
+```
+
+The evaluation compares report count, ROR, PRR, and Isolation Forest. For every
+simulated quarter, the ML scaler and model are fitted using strictly earlier
+rows and score only the current quarter. A minimum-history requirement makes
+unavailable quarters explicit instead of silently using future information.
+
+Outputs include full rankings, per-quarter metrics, a summary, and lineage:
+
+```text
+data/analytics/openfda/<snapshot-id>/backtests/<reference-set-id>/rankings.jsonl
+data/analytics/openfda/<snapshot-id>/backtests/<reference-set-id>/quarter_metrics.jsonl
+data/analytics/openfda/<snapshot-id>/backtests/<reference-set-id>/summary.json
+data/analytics/openfda/<snapshot-id>/backtests/<reference-set-id>/metadata.json
+```
+
+The summary reports recall@K, precision@K, median lead time, alert burden,
+detector availability, and reference-matching coverage. Reference records keep
+the original FDA product/risk text and label each normalized mapping as exact,
+manual, or unmatched.
+
+The checked-in 2025 Q2 reference file is a small, sourced demonstration subset,
+not a complete benchmark. Its source is the
+[FDA April–June 2025 quarterly report](https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/april-june-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse).
+FDA explicitly cautions that inclusion in these reports does not establish a
+causal relationship.
+
+Read a saved result through:
+
+```text
+GET /backtests/openfda/<snapshot-id>/<reference-set-id>
+```
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.
@@ -247,5 +290,5 @@ incidence, or replace review by pharmacovigilance and clinical experts.
 
 ## Project status
 
-Phases 0–4 are implemented. Phase 5 will add leakage-resistant, walk-forward
-backtesting against a versioned external reference set.
+Phases 0–5 are implemented. Phase 6 will add a transparent surveillance
+interface for human review.
