@@ -452,35 +452,7 @@ The project should be judged on more than model accuracy:
 - reproducibility of a released result from its manifest;
 - number and severity of unresolved governance or accessibility findings.
 
-## 11. Interview explanation
-
-### Thirty-second version
-
-> I built OpenSignal PH, an evidence-first drug-safety surveillance platform
-> using public FDA adverse-event reports. It creates reproducible data
-> snapshots, validates and normalizes reports, calculates standard and
-> covariate-aware disproportionality statistics, and uses temporal anomaly
-> detection to prioritize unusual patterns. I separated generative AI from the
-> safety decision: it can only summarize retrieved evidence with citations and
-> must abstain when unsupported. The project demonstrates data engineering,
-> statistical and ML evaluation, APIs, responsible AI, auditability, and
-> production platform design.
-
-### The important novelty statement
-
-> I did not invent FAERS signal detection. My contribution is the transparent
-> integration: data quality, conventional statistics, covariate sensitivity,
-> temporal ML, leakage-resistant evaluation, constrained evidence briefing,
-> human review, and end-to-end lineage are visible in one reproducible system.
-
-### The strongest technical discussion
-
-Explain one signal from raw manifest to curated record, contingency table,
-adjusted estimates, temporal features, saved artifact, API response, evidence
-brief, and audit event. Then explain why none of those components establishes
-causality and how a longitudinal study would answer a different question.
-
-## 12. Repository reading order
+## 11. Repository reading order
 
 1. `README.md` — setup and phase commands.
 2. `docs/system-design-and-research-guide.md` — complete system explanation.
@@ -489,4 +461,4 @@ causality and how a longitudinal study would answer a different question.
 5. `docs/historical-benchmark-protocol.md` — real-data evaluation protocol.
 6. `docs/operations.md` — deployment, audit, retention, and recovery.
 7. `docs/decisions/` — why important design choices were made.
-8. `docs/portfolio-walkthrough.md` — concise demonstration and interview flow.
+8. `docs/portfolio-walkthrough.md` — concise system demonstration flow.
