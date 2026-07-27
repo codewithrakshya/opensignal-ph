@@ -1,4 +1,4 @@
-.PHONY: install test lint format run
+.PHONY: install test lint format run ingest-sample
 
 install:
 	python -m pip install -e ".[dev,data,ml]"
@@ -16,3 +16,6 @@ format:
 
 run:
 	uvicorn opensignal.api.main:app --reload
+
+ingest-sample:
+	opensignal ingest --manifest manifests/openfda-demo.json

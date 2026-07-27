@@ -82,6 +82,31 @@ The first milestone is a reproducible vertical slice:
 
 See [docs/roadmap.md](docs/roadmap.md) for the complete phased plan.
 
+## Phase 1 ingestion
+
+Ingestion is controlled by a versioned JSON manifest. A manifest fixes the
+snapshot identifier, openFDA search expression, page size, and maximum record
+count:
+
+```bash
+cp .env.example .env
+opensignal ingest --manifest manifests/openfda-demo.json
+```
+
+The command writes:
+
+- immutable page envelopes under `data/raw/openfda/<snapshot-id>/`;
+- retrieval time, request parameters, and manifest digest with every page;
+- an atomic checkpoint under `data/checkpoints/openfda/`;
+- a JSON run summary to standard output.
+
+Rerunning the same manifest verifies and reuses completed pages. It does not
+call openFDA again or duplicate records. To intentionally retrieve a new
+snapshot, create a new manifest with a new `snapshot_id`.
+
+No API key is required for a small demonstration, but setting
+`OPENSIGNAL_OPENFDA_API_KEY` increases the documented openFDA request allowance.
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.

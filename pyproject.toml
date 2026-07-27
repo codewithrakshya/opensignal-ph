@@ -15,10 +15,14 @@ dependencies = [
   "uvicorn[standard]>=0.34,<1",
 ]
 
+[project.scripts]
+opensignal = "opensignal.cli:main"
+
 [project.optional-dependencies]
 dev = [
   "mypy>=1.14,<2",
   "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
   "pytest-cov>=6,<7",
   "ruff>=0.9,<1",
 ]

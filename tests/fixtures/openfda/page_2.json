@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "results": {
+      "limit": 2,
+      "skip": 2,
+      "total": 3
+    }
+  },
+  "results": [
+    {
+      "safetyreportid": "1003",
+      "serious": "1"
+    }
+  ]
+}

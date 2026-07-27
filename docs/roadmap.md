@@ -19,14 +19,15 @@ when its outputs are reproducible, tested, and documented.
 
 **Goal:** acquire a bounded openFDA sample safely and repeatably.
 
-- asynchronous client with retry, timeout, and rate-limit handling;
-- query manifest and retrieval metadata;
-- page-level checkpoints and idempotent reruns;
-- immutable JSON snapshots;
-- API-key support through environment configuration;
-- deterministic fixtures for offline tests.
+- [x] asynchronous client with retry, timeout, and rate-limit handling;
+- [x] query manifest and retrieval metadata;
+- [x] page-level checkpoints and idempotent reruns;
+- [x] immutable JSON snapshots;
+- [x] API-key support through environment configuration;
+- [x] deterministic fixtures for offline tests.
 
-**Exit criteria:** the same manifest can be rerun without duplicating data.
+**Status:** Complete. The same manifest can be rerun without another source
+request or duplicated pages; snapshot conflicts fail closed.
 
 ## Phase 2 — Data contracts and quality
 

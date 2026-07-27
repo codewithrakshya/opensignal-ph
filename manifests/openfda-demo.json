@@ -1,0 +1,7 @@
+{
+  "manifest_version": 1,
+  "snapshot_id": "demo-serious-reports-2024",
+  "search": "receivedate:[20240101 TO 20241231]+AND+serious:1",
+  "page_size": 100,
+  "max_records": 500
+}

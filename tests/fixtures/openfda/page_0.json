@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "results": {
+      "limit": 2,
+      "skip": 0,
+      "total": 3
+    }
+  },
+  "results": [
+    {
+      "safetyreportid": "1001",
+      "serious": "1"
+    },
+    {
+      "safetyreportid": "1002",
+      "serious": "1"
+    }
+  ]
+}

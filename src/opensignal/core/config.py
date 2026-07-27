@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
     openfda_base_url: str = "https://api.fda.gov/drug/event.json"
     openfda_api_key: str | None = None
+    openfda_max_attempts: int = 4
+    openfda_backoff_seconds: float = 1.0
     data_dir: Path = Path("data")
 
 
