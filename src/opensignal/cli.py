@@ -7,6 +7,11 @@ from pathlib import Path
 
 from opensignal.adjusted.pipeline import CovariateAdjustedPipeline
 from opensignal.backtesting.pipeline import BacktestPipeline
+from opensignal.benchmark.quarterly import (
+    QuarterlyAcquisitionManifest,
+    QuarterlyArchiveDownloader,
+)
+from opensignal.benchmark.reference import BenchmarkReferenceSet
 from opensignal.core.config import get_settings
 from opensignal.demo import run_portfolio_demo
 from opensignal.detection.pipeline import OpenFDAScoringPipeline
@@ -114,6 +119,39 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         help="Optional JSON mapping from target drug to comparator drug names",
     )
+    quarterly = commands.add_parser(
+        "download-quarterly",
+        help="Download checksum-tracked official FDA quarterly archives",
+    )
+    quarterly.add_argument("--manifest", type=Path, required=True)
+    quarterly.add_argument(
+        "--quarter",
+        action="append",
+        dest="quarters",
+        help="Quarter to download, such as 2024Q1; repeat as needed",
+    )
+    quarterly.add_argument(
+        "--destination",
+        type=Path,
+        default=Path("data/raw/faers-quarterly"),
+    )
+    quarterly.add_argument(
+        "--max-bytes",
+        type=int,
+        default=100_000_000,
+        help="Fail closed if any single archive exceeds this size",
+    )
+    validate_reference = commands.add_parser(
+        "validate-benchmark-reference",
+        help="Validate historical reference eligibility and temporal cutoff",
+    )
+    validate_reference.add_argument("--reference-set", type=Path, required=True)
+    validate_reference.add_argument(
+        "--analysis-quarter",
+        required=True,
+        help="Latest eligible FDA publication quarter, such as 2025-Q4",
+    )
+    validate_reference.add_argument("--output", type=Path)
     return parser
 
 
@@ -265,6 +303,31 @@ def main(argv: Sequence[str] | None = None) -> int:
             comparator_sets=args.comparator_sets,
         )
         print(json.dumps(asdict(adjusted_result), sort_keys=True))
+        return 0
+    if args.command == "download-quarterly":
+        manifest = QuarterlyAcquisitionManifest.from_path(args.manifest)
+        downloader = QuarterlyArchiveDownloader(args.destination)
+        records = [
+            downloader.download(archive, max_bytes=args.max_bytes)
+            for archive in manifest.select(
+                set(args.quarters) if args.quarters else None
+            )
+        ]
+        print(
+            json.dumps(
+                [record.model_dump(mode="json") for record in records],
+                sort_keys=True,
+            )
+        )
+        return 0
+    if args.command == "validate-benchmark-reference":
+        reference_set = BenchmarkReferenceSet.from_path(args.reference_set)
+        summary = reference_set.validation_summary(args.analysis_quarter)
+        if args.output:
+            reference_set.write_validation_summary(
+                args.analysis_quarter, args.output
+            )
+        print(json.dumps(summary, sort_keys=True))
         return 0
     raise AssertionError(f"Unhandled command: {args.command}")
 

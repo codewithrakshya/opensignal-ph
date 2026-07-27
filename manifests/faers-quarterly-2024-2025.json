@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "manifest_id": "faers-quarterly-ascii-2024-2025-v1",
+  "publisher": "U.S. Food and Drug Administration",
+  "source_page": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/fda-adverse-event-monitoring-system-aems-latest-quarterly-data-files",
+  "archives": [
+    {
+      "quarter": "2024Q1",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2024q1.zip",
+      "posted_date": "2024-04-22",
+      "approximate_size_bytes": 64000000
+    },
+    {
+      "quarter": "2024Q2",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2024q2.zip",
+      "posted_date": "2024-07-30",
+      "approximate_size_bytes": 65000000
+    },
+    {
+      "quarter": "2024Q3",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2024q3.zip",
+      "posted_date": "2024-10-30",
+      "approximate_size_bytes": 69000000
+    },
+    {
+      "quarter": "2024Q4",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2024Q4.zip",
+      "posted_date": "2025-01-28",
+      "approximate_size_bytes": 67000000
+    },
+    {
+      "quarter": "2025Q1",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2025q1.zip",
+      "posted_date": "2025-04-28",
+      "approximate_size_bytes": 68000000
+    },
+    {
+      "quarter": "2025Q2",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2025q2.zip",
+      "posted_date": "2025-07-29",
+      "approximate_size_bytes": 69000000
+    },
+    {
+      "quarter": "2025Q3",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2025q3.zip",
+      "posted_date": "2025-10-30",
+      "approximate_size_bytes": 73000000
+    },
+    {
+      "quarter": "2025Q4",
+      "url": "https://fis.fda.gov/content/Exports/faers_ascii_2025Q4.zip",
+      "approximate_size_bytes": 71000000,
+      "source_note": "The FDA extract page displays an internally inconsistent posting year; the date is intentionally unset pending source clarification."
+    }
+  ]
+}

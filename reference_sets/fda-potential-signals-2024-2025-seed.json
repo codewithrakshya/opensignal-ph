@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "reference_set_id": "fda-potential-signals-2024-2025-seed-v1",
+  "title": "FDA potential safety signals 2024–2025 terminology-review seed",
+  "publisher": "U.S. Food and Drug Administration",
+  "source_index": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse-event-monitoring",
+  "retrieved_at": "2026-07-27T00:00:00Z",
+  "entries": [
+    {
+      "reference_id": "fda-2024-q1-akeega-zejula-haemorrhage",
+      "publication_quarter": "2024-Q1",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/january-march-2024-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse",
+      "source_product_text": "Akeega (niraparib and abiraterone acetate); Zejula (niraparib)",
+      "source_event_text": "Haemorrhage",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified",
+      "notes": "Seed example only; requires independent product and MedDRA terminology review."
+    },
+    {
+      "reference_id": "fda-2024-q2-orexin-antagonists-paradoxical-reaction",
+      "publication_quarter": "2024-Q2",
+      "source_url": "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/april-june-2024-potential-signals-serious-risksnew-safety-information-identified-fda-adverse-event",
+      "source_product_text": "Belsomra (suvorexant); Dayvigo (lemborexant); Quviviq (daridorexant)",
+      "source_event_text": "Paradoxical drug reaction",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2024-q3-alk-inhibitors-scar",
+      "publication_quarter": "2024-Q3",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/july-september-2024-new-safety-information-or-potential-signals-serious-risks-identified-fda-adverse",
+      "source_product_text": "Alecensa (alectinib); Alunbrig (brigatinib); Xalkori (crizotinib)",
+      "source_event_text": "Severe cutaneous adverse reaction",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2024-q4-alk-inhibitors-optic-neuropathy",
+      "publication_quarter": "2024-Q4",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/october-december-2024-new-safety-information-or-potential-signals-serious-risks-identified-fda",
+      "source_product_text": "Alecensa (alectinib); Alunbrig (brigatinib); Lorbrena (lorlatinib); Zykadia (ceritinib)",
+      "source_event_text": "Optic neuropathy",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2025-q1-elevidys-hepatotoxicity-fatalities",
+      "publication_quarter": "2025-Q1",
+      "source_url": "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/january-march-2025-potential-signals-serious-risksnew-safety-information-identified-fda-adverse",
+      "source_product_text": "Elevidys (delandistrogene moxeparvovec-rokl)",
+      "source_event_text": "Hepatotoxicity-associated fatalities",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2025-q2-acetaminophen-anaphylactic-reaction",
+      "publication_quarter": "2025-Q2",
+      "source_url": "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/april-june-2025-potential-signals-serious-risksnew-safety-information-identified-fda-adverse-event",
+      "source_product_text": "Acetaminophen-containing products",
+      "source_event_text": "Anaphylactic reaction",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2025-q3-adzynma-neutralizing-antibodies",
+      "publication_quarter": "2025-Q3",
+      "source_url": "https://www.fda.gov/drugs/fdas-adverse-event-reporting-system-faers/july-september-2025-potential-signals-serious-risksnew-safety-information-identified-fda-adverse",
+      "source_product_text": "Adzynma (ADAMTS13, recombinant-krhn)",
+      "source_event_text": "Neutralizing antibodies with fatal outcome",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    },
+    {
+      "reference_id": "fda-2025-q4-alyglo-hypersensitivity-lots",
+      "publication_quarter": "2025-Q4",
+      "source_url": "https://www.fda.gov/drugs/fda-adverse-event-monitoring-system-aems/october-december-2025-new-safety-information-or-potential-signals-serious-risks-identified-fda",
+      "source_product_text": "Alyglo (immune globulin intravenous, human-stwk)",
+      "source_event_text": "Increased hypersensitivity reactions in certain lots",
+      "match_method": "unmatched",
+      "review_status": "seeded_unverified"
+    }
+  ]
+}

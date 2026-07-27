@@ -86,6 +86,35 @@ The first milestone is a reproducible vertical slice:
 
 See [docs/roadmap.md](docs/roadmap.md) for the complete phased plan.
 
+## Historical benchmark foundation
+
+Phase 10 begins the transition from the synthetic portfolio demonstration to a
+real historical FAERS evaluation. Official 2024–2025 quarterly archive URLs are
+versioned in `manifests/faers-quarterly-2024-2025.json`; downloads are bounded,
+ZIP-validated, and paired with immutable SHA-256 lock metadata.
+
+Start with one quarter rather than downloading the full window:
+
+```bash
+opensignal download-quarterly \
+  --manifest manifests/faers-quarterly-2024-2025.json \
+  --quarter 2024Q1 \
+  --max-bytes 100000000
+```
+
+The FDA potential-signal file is currently an unverified terminology-review
+seed. Confirm that it remains excluded from performance scoring:
+
+```bash
+opensignal validate-benchmark-reference \
+  --reference-set reference_sets/fda-potential-signals-2024-2025-seed.json \
+  --analysis-quarter 2025-Q4
+```
+
+See [the historical benchmark protocol](docs/historical-benchmark-protocol.md)
+for source provenance, independent-review requirements, temporal leakage
+controls, limitations, and the expansion checklist.
+
 ## Phase 1 ingestion
 
 Ingestion is controlled by a versioned JSON manifest. A manifest fixes the

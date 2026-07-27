@@ -169,3 +169,24 @@ demographics, time, subgroup heterogeneity, or sparse-data shrinkage.
 **Status:** Complete for FAERS reporting-association sensitivity analysis.
 Claims/EHR causal estimation remains intentionally inactive until a real,
 governed longitudinal dataset and study protocol are supplied.
+
+## Phase 10 — Historical FAERS benchmark
+
+**Goal:** replace the illustrative demo evaluation with a reproducible,
+independently reviewed historical benchmark.
+
+- [x] versioned official 2024–2025 quarterly ASCII archive manifest;
+- [x] bounded, resumable download with ZIP validation and SHA-256 locks;
+- [x] FDA quarterly potential-signal reference seed with source provenance;
+- [x] independent-review and temporal-eligibility validation contract;
+- [x] documented leakage controls, limitations, and expansion workflow;
+- [ ] transcribe and independently review the complete FDA reference window;
+- [ ] parse and reconcile one quarterly ASCII pilot;
+- [ ] acquire and process all selected quarters;
+- [ ] freeze analysis protocol and run equal-alert-burden comparisons;
+- [ ] publish uncertainty, unmatched coverage, and sensitivity results.
+
+**Status:** Data foundation complete. The checked-in eight-entry file is an
+unverified workflow seed and intentionally produces zero eligible references.
+No historical performance claim is supported until the remaining items are
+completed.
