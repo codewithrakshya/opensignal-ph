@@ -6,6 +6,8 @@ from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Any
 
+from opensignal.ingestion.manifest import SAFE_ID
+
 
 def canonical_json_bytes(payload: object) -> bytes:
     return (
@@ -96,12 +98,21 @@ class Checkpoint:
 class RawSnapshotStore:
     """Writes content-addressed immutable page envelopes."""
 
-    def __init__(self, data_dir: Path, snapshot_id: str) -> None:
+    def __init__(
+        self,
+        data_dir: Path,
+        snapshot_id: str,
+        *,
+        source: str = "openfda",
+    ) -> None:
+        if not SAFE_ID.fullmatch(source):
+            raise ValueError("source must be a safe lowercase identifier")
         self.data_dir = data_dir
         self.snapshot_id = snapshot_id
-        self.snapshot_dir = data_dir / "raw" / "openfda" / snapshot_id
+        self.source = source
+        self.snapshot_dir = data_dir / "raw" / source / snapshot_id
         self.checkpoint_path = (
-            data_dir / "checkpoints" / "openfda" / f"{snapshot_id}.json"
+            data_dir / "checkpoints" / source / f"{snapshot_id}.json"
         )
 
     def page_path(self, skip: int) -> Path:

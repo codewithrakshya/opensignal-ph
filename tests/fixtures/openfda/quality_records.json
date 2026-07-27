@@ -1,0 +1,83 @@
+[
+  {
+    "safetyreportid": "100",
+    "safetyreportversion": "1",
+    "receivedate": "20240101",
+    "serious": "1",
+    "patient": {
+      "reaction": [{"reactionmeddrapt": "Headache"}],
+      "drug": [
+        {
+          "medicinalproduct": "Aspirin Brand",
+          "drugcharacterization": "1",
+          "openfda": {"generic_name": ["Aspirin"]}
+        }
+      ]
+    }
+  },
+  {
+    "safetyreportid": "100",
+    "safetyreportversion": "2",
+    "receivedate": "20240201",
+    "serious": "1",
+    "patient": {
+      "reaction": [
+        {"reactionmeddrapt": "Headache"},
+        {"reactionmeddrapt": " nausea "}
+      ],
+      "drug": [
+        {
+          "medicinalproduct": "Aspirin Brand",
+          "drugcharacterization": "1",
+          "openfda": {"generic_name": [" aspirin "]}
+        }
+      ]
+    }
+  },
+  {
+    "safetyreportid": "200",
+    "safetyreportversion": "1",
+    "receivedate": "20240301",
+    "serious": "2",
+    "patient": {
+      "reaction": [{"reactionmeddrapt": "Rash"}],
+      "drug": [
+        {
+          "medicinalproduct": "  Drug   X ",
+          "drugcharacterization": "2"
+        }
+      ]
+    }
+  },
+  {
+    "safetyreportid": "300",
+    "safetyreportversion": "1",
+    "receivedate": "20240401",
+    "serious": "1"
+  },
+  {
+    "safetyreportid": "400",
+    "safetyreportversion": "1",
+    "receivedate": "20240501",
+    "serious": "1",
+    "patient": {
+      "reaction": [{"reactionmeddrapt": "Fatigue"}],
+      "drug": [{"drugcharacterization": "1"}]
+    }
+  },
+  {
+    "safetyreportid": "200",
+    "safetyreportversion": "1",
+    "receivedate": "20240301",
+    "serious": "2",
+    "patient": {
+      "reaction": [{"reactionmeddrapt": "Rash"}],
+      "drug": [
+        {
+          "medicinalproduct": "  Drug   X ",
+          "drugcharacterization": "2"
+        }
+      ]
+    }
+  }
+]

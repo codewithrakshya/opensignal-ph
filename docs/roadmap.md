@@ -33,14 +33,16 @@ request or duplicated pages; snapshot conflicts fail closed.
 
 **Goal:** make data fitness visible before modeling.
 
-- typed source and curated schemas;
-- follow-up report deduplication rules;
-- drug-role and reaction normalization;
-- accepted/rejected record outputs;
-- completeness, validity, uniqueness, freshness, and volume checks;
-- machine-readable quality report.
+- [x] typed source and curated schemas;
+- [x] follow-up report deduplication rules;
+- [x] drug-role and reaction normalization;
+- [x] accepted/rejected record outputs;
+- [x] completeness, validity, uniqueness, freshness, and volume checks;
+- [x] machine-readable quality report;
+- [x] source-neutral raw snapshot storage contract.
 
-**Exit criteria:** every input record is accepted or rejected with a reason.
+**Status:** Complete. Every input record is accepted, superseded by a later
+follow-up, classified as an exact duplicate, or rejected with a reason.
 
 ## Phase 3 — Statistical signal baseline
 

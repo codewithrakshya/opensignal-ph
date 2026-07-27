@@ -36,6 +36,10 @@ Quality checks produce data, not only log messages. Results include freshness,
 completeness, validity, uniqueness, volume, and distribution checks and are
 available to both the API and dashboard.
 
+Source processors implement a shared snapshot-processing protocol and are
+selected through a registry. Adding another source requires an adapter and
+registration; it does not require changes to the CLI or artifact layout.
+
 ### Detector interface
 
 Every statistical or ML method accepts a defined analysis window and produces

@@ -1,4 +1,4 @@
-.PHONY: install test lint format run ingest-sample
+.PHONY: install test lint format run ingest-sample process-sample
 
 install:
 	python -m pip install -e ".[dev,data,ml]"
@@ -19,3 +19,6 @@ run:
 
 ingest-sample:
 	opensignal ingest --manifest manifests/openfda-demo.json
+
+process-sample:
+	opensignal process --source openfda --snapshot-id demo-serious-reports-2024

@@ -107,6 +107,38 @@ snapshot, create a new manifest with a new `snapshot_id`.
 No API key is required for a small demonstration, but setting
 `OPENSIGNAL_OPENFDA_API_KEY` increases the documented openFDA request allowance.
 
+## Phase 2 validation and curation
+
+Process an ingested snapshot with:
+
+```bash
+opensignal process \
+  --source openfda \
+  --snapshot-id demo-serious-reports-2024
+```
+
+The processing layer:
+
+- validates every source report against typed, permissive openFDA contracts;
+- keeps the highest `safetyreportversion` for each report identifier;
+- distinguishes older follow-ups from exact duplicate versions;
+- prefers standardized generic or substance names and records name provenance;
+- normalizes drug roles and reaction terms;
+- preserves accepted reports and rejected-record reasons;
+- produces flattened drug-event pairs for downstream signal analysis;
+- emits a machine-readable quality report with checks and artifact lineage.
+
+Artifacts are written under:
+
+```text
+data/validated/openfda/<snapshot-id>/
+data/curated/openfda/<snapshot-id>/
+data/quality/openfda/<snapshot-id>/
+```
+
+Snapshot storage now accepts a source identifier, so additional adapters can
+reuse the same integrity, checkpoint, and directory contracts.
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.
