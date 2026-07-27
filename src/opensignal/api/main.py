@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from opensignal import __version__
+from opensignal.api.adjusted import router as adjusted_router
 from opensignal.api.backtests import router as backtests_router
 from opensignal.api.briefs import router as briefs_router
 from opensignal.api.operations import router as operations_router
@@ -21,6 +22,7 @@ app = FastAPI(
     ),
 )
 app.include_router(signals_router)
+app.include_router(adjusted_router)
 app.include_router(temporal_router)
 app.include_router(backtests_router)
 app.include_router(briefs_router)

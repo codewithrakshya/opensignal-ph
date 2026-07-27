@@ -99,6 +99,9 @@ class CuratedDrugEvent(BaseModel):
     report_version: int
     received_date: date
     serious: bool | None
+    patient_age_years: float | None = Field(default=None, ge=0, le=130)
+    patient_age_group: str = "unknown"
+    patient_sex: str = "unknown"
     drug_name: str
     drug_name_source: str
     drug_role: str

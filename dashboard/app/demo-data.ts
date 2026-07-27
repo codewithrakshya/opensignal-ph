@@ -13,6 +13,15 @@ export type Signal = {
   trend: number[];
   reasons: string[];
   brief: EvidenceBrief;
+  adjustment: {
+    crude: number;
+    mantelHaenszel: number;
+    penalized: number;
+    bayesian: number;
+    activeComparator: number;
+    heterogeneity: "Low" | "Moderate" | "High";
+    covariates: string[];
+  };
 };
 
 export type EvidenceBrief = {
@@ -87,6 +96,15 @@ export const signals: Signal[] = [
       provider: "Template baseline",
       model: "deterministic-v1",
     },
+    adjustment: {
+      crude: 4.82,
+      mantelHaenszel: 3.46,
+      penalized: 3.18,
+      bayesian: 2.94,
+      activeComparator: 2.21,
+      heterogeneity: "Moderate",
+      covariates: ["Age group", "Sex", "Calendar year"],
+    },
   },
   {
     id: "dupilumab-ocular",
@@ -125,6 +143,15 @@ export const signals: Signal[] = [
       provider: "Template baseline",
       model: "deterministic-v1",
     },
+    adjustment: {
+      crude: 3.74,
+      mantelHaenszel: 2.88,
+      penalized: 2.62,
+      bayesian: 2.49,
+      activeComparator: 2.07,
+      heterogeneity: "Low",
+      covariates: ["Age group", "Sex", "Calendar year"],
+    },
   },
   {
     id: "topiramate-hypersensitivity",
@@ -160,6 +187,15 @@ export const signals: Signal[] = [
       provider: "Template baseline",
       model: "deterministic-v1",
     },
+    adjustment: {
+      crude: 2.61,
+      mantelHaenszel: 1.92,
+      penalized: 1.78,
+      bayesian: 1.66,
+      activeComparator: 1.31,
+      heterogeneity: "Moderate",
+      covariates: ["Age group", "Sex", "Calendar year"],
+    },
   },
   {
     id: "dexmedetomidine-di",
@@ -191,6 +227,15 @@ export const signals: Signal[] = [
       citations: [],
       provider: "Template baseline",
       model: "deterministic-v1",
+    },
+    adjustment: {
+      crude: 0.19,
+      mantelHaenszel: 0.41,
+      penalized: 0.58,
+      bayesian: 0.73,
+      activeComparator: 0.84,
+      heterogeneity: "High",
+      covariates: ["Age group", "Sex", "Calendar year"],
     },
   },
 ];

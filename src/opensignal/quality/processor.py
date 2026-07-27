@@ -23,6 +23,8 @@ from opensignal.quality.contracts import (
 from opensignal.quality.normalization import (
     normalize_drug_name,
     normalize_drug_role,
+    normalize_patient_age,
+    normalize_patient_sex,
     normalize_term,
 )
 
@@ -229,6 +231,11 @@ class OpenFDAQualityProcessor:
             {normalize_term(item.reactionmeddrapt) for item in report.patient.reaction}
         )
         rows: list[CuratedDrugEvent] = []
+        age_years, age_group = normalize_patient_age(
+            report.patient.patientonsetage,
+            report.patient.patientonsetageunit,
+        )
+        patient_sex = normalize_patient_sex(report.patient.patientsex)
         fallback_count = 0
         seen: set[tuple[str, str, str]] = set()
 
@@ -251,6 +258,9 @@ class OpenFDAQualityProcessor:
                         report_version=report.safetyreportversion,
                         received_date=received_date,
                         serious=self._serious(report.serious),
+                        patient_age_years=age_years,
+                        patient_age_group=age_group,
+                        patient_sex=patient_sex,
                         drug_name=drug_name,
                         drug_name_source=name_source,
                         drug_role=role,

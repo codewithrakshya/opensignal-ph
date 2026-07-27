@@ -201,6 +201,38 @@ export function SurveillanceDashboard() {
               <div><span>Serious</span><strong>{selected.serious}</strong></div>
             </div>
 
+            <div className="adjustment-card">
+              <div className="adjustment-head">
+                <div>
+                  <p className="eyebrow">Covariate sensitivity</p>
+                  <h3>Does adjustment change the signal?</h3>
+                </div>
+                <span>{selected.adjustment.heterogeneity} heterogeneity</span>
+              </div>
+              <div className="estimate-grid">
+                {[
+                  ["Crude ROR", selected.adjustment.crude],
+                  ["Mantel–Haenszel", selected.adjustment.mantelHaenszel],
+                  ["Penalized model", selected.adjustment.penalized],
+                  ["Bayesian shrinkage", selected.adjustment.bayesian],
+                  ["Class comparator", selected.adjustment.activeComparator],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <span>{label}</span>
+                    <strong>{Number(value).toFixed(2)}</strong>
+                  </div>
+                ))}
+              </div>
+              <p>
+                Adjusted for {selected.adjustment.covariates.join(", ")}.
+                Differences from the crude estimate may indicate confounding,
+                sparse-data instability, or subgroup variation.
+              </p>
+              <small>
+                Adjusted reporting associations—not incidence, relative risk, or causality.
+              </small>
+            </div>
+
             <div className="trend-card">
               <div className="trend-title">
                 <div><span>Quarterly reports</span><strong>{selected.cases} current</strong></div>

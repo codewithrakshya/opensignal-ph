@@ -16,4 +16,5 @@ def test_portfolio_demo_runs_end_to_end(tmp_path) -> None:
     assert result.curated_rows > 0
     assert result.statistical_scores == 8
     assert result.temporal_scores == 16
+    assert result.adjusted_results == 4
     assert result.brief_status == "generated"

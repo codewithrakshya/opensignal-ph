@@ -3,6 +3,7 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
 
+from opensignal.adjusted.pipeline import CovariateAdjustedPipeline
 from opensignal.detection.pipeline import OpenFDAScoringPipeline
 from opensignal.evidence.pipeline import EvidenceBriefingPipeline
 from opensignal.evidence.providers import TemplateBriefProvider
@@ -16,6 +17,7 @@ class DemoResult:
     curated_rows: int
     statistical_scores: int
     temporal_scores: int
+    adjusted_results: int
     brief_status: str
     output_directory: str
 
@@ -44,6 +46,10 @@ def run_portfolio_demo(
                         "drug_name": drug,
                         "reaction": event,
                         "serious": event == "EVENT X" and report % 2 == 0,
+                        "patient_age_group": (
+                            "18-44" if report % 3 == 0 else "45-64"
+                        ),
+                        "patient_sex": "female" if report % 2 == 0 else "male",
                     }
                 )
     curated = (
@@ -62,6 +68,7 @@ def run_portfolio_demo(
     temporal = OpenFDATemporalPipeline(
         data_dir, contamination=0.125, minimum_history=3
     ).run(snapshot_id)
+    adjusted = CovariateAdjustedPipeline(data_dir).run(snapshot_id)
     brief = EvidenceBriefingPipeline(
         data_dir, TemplateBriefProvider()
     ).run(
@@ -75,6 +82,7 @@ def run_portfolio_demo(
         curated_rows=len(rows),
         statistical_scores=statistical.scores_written,
         temporal_scores=temporal.signal_rows,
+        adjusted_results=adjusted.results_written,
         brief_status=brief.status,
         output_directory=str(
             Path("analytics") / "openfda" / snapshot_id
@@ -85,4 +93,3 @@ def run_portfolio_demo(
         (json.dumps(asdict(result), sort_keys=True) + "\n").encode(),
     )
     return result
-

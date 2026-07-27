@@ -151,3 +151,21 @@ immutability tests. See ADR 0010.
 **Status:** Portfolio release complete. Trusted role headers and filesystem
 artifacts are explicit demonstration implementations; production deployment
 must replace them with identity-provider claims and managed durable storage.
+
+## Phase 9 — Covariate-aware sensitivity analysis
+
+**Goal:** show whether crude reporting associations are sensitive to measured
+demographics, time, subgroup heterogeneity, or sparse-data shrinkage.
+
+- [x] normalize age group and sex with explicit unknown categories;
+- [x] stratified ROR/PRR and approximate heterogeneity assessment;
+- [x] Mantel–Haenszel adjusted reporting odds ratio;
+- [x] L2-penalized report-level logistic adjustment;
+- [x] empirical hierarchical Beta-Binomial shrinkage;
+- [x] crude-versus-adjusted sensitivity artifact, API, CLI, and dashboard;
+- [x] governed claims/EHR longitudinal validation contract;
+- [x] interpretation and missingness documentation.
+
+**Status:** Complete for FAERS reporting-association sensitivity analysis.
+Claims/EHR causal estimation remains intentionally inactive until a real,
+governed longitudinal dataset and study protocol are supplied.

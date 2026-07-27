@@ -5,6 +5,7 @@ from collections.abc import Sequence
 from dataclasses import asdict
 from pathlib import Path
 
+from opensignal.adjusted.pipeline import CovariateAdjustedPipeline
 from opensignal.backtesting.pipeline import BacktestPipeline
 from opensignal.core.config import get_settings
 from opensignal.demo import run_portfolio_demo
@@ -101,6 +102,17 @@ def build_parser() -> argparse.ArgumentParser:
         "--evidence-set",
         type=Path,
         default=Path("evidence_sets/fda-demo-v1.json"),
+    )
+    adjusted = commands.add_parser(
+        "adjust",
+        help="Run covariate-aware reporting-association sensitivity analyses",
+    )
+    adjusted.add_argument("--source", choices=["openfda"], default="openfda")
+    adjusted.add_argument("--snapshot-id", required=True)
+    adjusted.add_argument(
+        "--comparator-sets",
+        type=Path,
+        help="Optional JSON mapping from target drug to comparator drug names",
     )
     return parser
 
@@ -239,11 +251,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.provider,
         )
     if args.command == "demo":
-        result = run_portfolio_demo(
+        demo_result = run_portfolio_demo(
             get_settings().data_dir,
             args.evidence_set,
         )
-        print(json.dumps(asdict(result), sort_keys=True))
+        print(json.dumps(asdict(demo_result), sort_keys=True))
+        return 0
+    if args.command == "adjust":
+        if args.source != "openfda":
+            raise ValueError(f"Unsupported adjusted source: {args.source}")
+        adjusted_result = CovariateAdjustedPipeline(get_settings().data_dir).run(
+            args.snapshot_id,
+            comparator_sets=args.comparator_sets,
+        )
+        print(json.dumps(asdict(adjusted_result), sort_keys=True))
         return 0
     raise AssertionError(f"Unhandled command: {args.command}")
 

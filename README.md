@@ -358,6 +358,24 @@ opensignal demo
 ```
 
 This produces statistical scores, temporal ML artifacts, and a grounded
-evidence brief under `data/analytics/openfda/portfolio-demo`. See
+evidence brief under `data/analytics/openfda/portfolio-demo`. It also writes
+covariate-aware sensitivity results comparing crude, Mantel–Haenszel,
+penalized, and hierarchical Bayesian reporting associations.
+
+Run the adjusted analysis for an existing curated snapshot with:
+
+```bash
+opensignal adjust --source openfda --snapshot-id <snapshot-id>
+```
+
+Results are available from:
+
+```text
+GET /adjusted/openfda/<snapshot-id>?drug=<drug>&event=<event>
+```
+
+See `docs/adjusted-methods.md` for assumptions, missingness handling, and the
+important boundary between adjusted FAERS reporting associations and causal
+claims/EHR analyses. See
 `docs/portfolio-walkthrough.md` for the interview demonstration and
 `docs/operations.md` for scheduling, retention, audit, and recovery guidance.
