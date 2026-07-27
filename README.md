@@ -166,6 +166,39 @@ concentrations across sites with different collection and laboratory methods.
 The demonstration manifest is capped at 5,000 records and selects only fields
 used by the current typed contract.
 
+## Phase 3 statistical signal scoring
+
+After processing an openFDA snapshot, calculate report-level ROR and PRR scores:
+
+```bash
+opensignal score \
+  --source openfda \
+  --snapshot-id demo-serious-reports-2024
+```
+
+Outputs are written to:
+
+```text
+data/analytics/openfda/<snapshot-id>/signals.jsonl
+data/analytics/openfda/<snapshot-id>/metadata.json
+```
+
+Every score contains its complete two-by-two contingency counts, estimate,
+95% confidence interval, named threshold results, stability status, analysis
+date, and explanation. The metadata records the SHA-256 digest of the curated
+input and the criteria version.
+
+The API exposes the saved artifact without recalculating it:
+
+```text
+GET /signals/openfda/<snapshot-id>
+GET /signals/openfda/<snapshot-id>?potential_only=true&stable_only=true
+GET /signals/openfda/<snapshot-id>?detector=proportional_reporting_ratio
+```
+
+These are reporting-pattern signals for review, not causal conclusions or
+estimates of adverse-event incidence.
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.

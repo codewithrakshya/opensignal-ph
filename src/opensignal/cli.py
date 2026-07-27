@@ -6,6 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from opensignal.core.config import get_settings
+from opensignal.detection.pipeline import OpenFDAScoringPipeline
 from opensignal.ingestion.manifest import IngestionManifest
 from opensignal.ingestion.openfda import OpenFDAClient
 from opensignal.ingestion.runner import OpenFDAIngestionRunner
@@ -46,6 +47,16 @@ def build_parser() -> argparse.ArgumentParser:
         default="openfda",
     )
     process.add_argument("--snapshot-id", required=True)
+    score = commands.add_parser(
+        "score",
+        help="Calculate openFDA statistical signal scores",
+    )
+    score.add_argument(
+        "--source",
+        choices=["openfda"],
+        default="openfda",
+    )
+    score.add_argument("--snapshot-id", required=True)
     return parser
 
 
@@ -97,6 +108,15 @@ def process(source: str, snapshot_id: str) -> int:
     return 0
 
 
+def score(source: str, snapshot_id: str) -> int:
+    settings = get_settings()
+    if source != "openfda":
+        raise ValueError(f"Unsupported scoring source: {source}")
+    result = OpenFDAScoringPipeline(settings.data_dir).run(snapshot_id)
+    print(json.dumps(asdict(result), sort_keys=True))
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "ingest":
@@ -105,4 +125,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         return asyncio.run(ingest_socrata(args.manifest))
     if args.command == "process":
         return process(args.source, args.snapshot_id)
+    if args.command == "score":
+        return score(args.source, args.snapshot_id)
     raise AssertionError(f"Unhandled command: {args.command}")

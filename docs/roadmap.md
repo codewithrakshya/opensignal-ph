@@ -64,14 +64,14 @@ infrastructure while retaining distinct scientifically appropriate schemas.
 
 **Goal:** produce auditable drug-event signal scores.
 
-- contingency-table construction;
-- ROR and PRR with confidence intervals;
-- minimum-case and stability rules;
-- reproducible quarterly scoring;
-- API endpoints for score details and explanations.
+- [x] report-level contingency-table construction;
+- [x] ROR and PRR with confidence intervals;
+- [x] explicit minimum-case and conservative stability rules;
+- [x] versioned scoring artifacts with curated-input digest;
+- [x] API endpoint for score details, criteria, and explanations.
 
-**Exit criteria:** reference examples and edge cases match independently
-calculated expected values.
+**Status:** Complete. Reference calculations, sparse-table edge cases, artifact
+lineage, and API filtering are covered by automated tests.
 
 ## Phase 4 — Temporal ML
 

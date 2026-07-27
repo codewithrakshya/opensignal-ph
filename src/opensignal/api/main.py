@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from opensignal import __version__
+from opensignal.api.signals import router as signals_router
 from opensignal.core.config import get_settings
 from opensignal.core.models import HealthResponse
 
@@ -14,6 +15,7 @@ app = FastAPI(
         "Outputs are potential reporting signals and do not establish causality."
     ),
 )
+app.include_router(signals_router)
 
 
 @app.get("/health", response_model=HealthResponse, tags=["operations"])

@@ -41,13 +41,22 @@ class ReportingOddsRatio:
         if not isinstance(inputs, ContingencyTable):
             raise TypeError("ROR requires a ContingencyTable")
 
-        # Haldane-Anscombe correction keeps sparse tables finite.
-        a, b, c, d = (value + 0.5 for value in (inputs.a, inputs.b, inputs.c, inputs.d))
+        # Apply Haldane-Anscombe only when a zero cell would make ROR undefined.
+        correction = 0.5 if 0 in (inputs.a, inputs.b, inputs.c, inputs.d) else 0
+        a, b, c, d = (
+            float(value + correction)
+            for value in (inputs.a, inputs.b, inputs.c, inputs.d)
+        )
         ror = (a * d) / (b * c)
         standard_error = math.sqrt((1 / a) + (1 / b) + (1 / c) + (1 / d))
         lower = math.exp(math.log(ror) - 1.96 * standard_error)
         upper = math.exp(math.log(ror) + 1.96 * standard_error)
-        is_signal = inputs.a >= 3 and lower > 1
+        criteria = {
+            "minimum_case_count": inputs.a >= 3,
+            "lower_confidence_bound_above_one": lower > 1,
+        }
+        is_signal = all(criteria.values())
+        stable = inputs.a >= 5 and lower > 1
 
         return SignalScore(
             drug=drug,
@@ -58,9 +67,15 @@ class ReportingOddsRatio:
             lower_bound=lower,
             upper_bound=upper,
             case_count=inputs.a,
+            other_events_with_drug=inputs.b,
+            target_event_with_other_drugs=inputs.c,
+            other_events_with_other_drugs=inputs.d,
+            criteria=criteria,
+            passes_stability_rule=stable,
             explanation=(
                 "Potential reporting signal when there are at least three target "
-                "cases and the lower 95% confidence bound exceeds 1."
+                "cases and the lower 95% confidence bound exceeds 1. The "
+                "conservative stability rule additionally requires five cases."
             ),
             is_potential_signal=is_signal,
         )
