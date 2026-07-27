@@ -77,15 +77,17 @@ lineage, and API filtering are covered by automated tests.
 
 **Goal:** test whether ML improves prioritization.
 
-- quarterly feature table with reporting volume, growth, seriousness, and
+- [x] quarterly feature table with reporting volume, growth, seriousness, and
   baseline statistics;
-- Isolation Forest baseline;
-- change-point detection;
-- explainable feature contributions;
-- saved model and feature metadata;
-- no LLMs in core signal scoring.
+- [x] seeded Isolation Forest baseline;
+- [x] prior-history robust change-point detection;
+- [x] explainable feature deviations;
+- [x] saved model, feature table, hashes, and feature metadata;
+- [x] API and CLI delivery with no LLMs in core signal scoring.
 
-**Exit criteria:** models run from versioned features and reproduce saved scores.
+**Status:** Complete. Models run from versioned features, preserve zero-count
+quarters, save their full configuration and fitted artifact, and reproduce
+saved scores under automated tests.
 
 ## Phase 5 — Leakage-resistant backtesting
 

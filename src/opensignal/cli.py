@@ -15,6 +15,7 @@ from opensignal.ingestion.socrata_manifest import SocrataManifest
 from opensignal.ingestion.socrata_runner import SocrataIngestionRunner
 from opensignal.ingestion.storage import RawSnapshotStore
 from opensignal.quality.registry import processor_for, supported_sources
+from opensignal.temporal.pipeline import OpenFDATemporalPipeline
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -57,6 +58,12 @@ def build_parser() -> argparse.ArgumentParser:
         default="openfda",
     )
     score.add_argument("--snapshot-id", required=True)
+    temporal = commands.add_parser(
+        "temporal",
+        help="Build quarterly features and temporal ML signal scores",
+    )
+    temporal.add_argument("--source", choices=["openfda"], default="openfda")
+    temporal.add_argument("--snapshot-id", required=True)
     return parser
 
 
@@ -117,6 +124,15 @@ def score(source: str, snapshot_id: str) -> int:
     return 0
 
 
+def temporal(source: str, snapshot_id: str) -> int:
+    settings = get_settings()
+    if source != "openfda":
+        raise ValueError(f"Unsupported temporal source: {source}")
+    result = OpenFDATemporalPipeline(settings.data_dir).run(snapshot_id)
+    print(json.dumps(asdict(result), sort_keys=True))
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "ingest":
@@ -127,4 +143,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         return process(args.source, args.snapshot_id)
     if args.command == "score":
         return score(args.source, args.snapshot_id)
+    if args.command == "temporal":
+        return temporal(args.source, args.snapshot_id)
     raise AssertionError(f"Unhandled command: {args.command}")

@@ -1,4 +1,4 @@
-.PHONY: install test lint format run ingest-sample process-sample score-sample ingest-cdc process-cdc
+.PHONY: install test lint format run ingest-sample process-sample score-sample temporal-sample ingest-cdc process-cdc
 
 install:
 	python -m pip install -e ".[dev,data,ml]"
@@ -25,6 +25,9 @@ process-sample:
 
 score-sample:
 	opensignal score --source openfda --snapshot-id demo-serious-reports-2024
+
+temporal-sample:
+	opensignal temporal --source openfda --snapshot-id demo-serious-reports-2024
 
 ingest-cdc:
 	opensignal ingest-socrata --manifest manifests/cdc-wastewater-demo.json

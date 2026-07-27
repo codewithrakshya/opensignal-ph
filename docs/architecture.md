@@ -57,8 +57,14 @@ the scientific grain remains explicit.
 ### Detector interface
 
 Every statistical or ML method accepts a defined analysis window and produces
-a `SignalScore`. Detectors must explain their output and declare the minimum
-data they require. The first implementation is reporting odds ratio (ROR).
+a documented score. Detectors must explain their output and declare the
+minimum data they require. ROR and PRR provide the statistical baseline.
+
+The temporal layer builds a versioned quarterly feature table and uses a
+seeded Isolation Forest for unsupervised prioritization. A separate robust
+change score uses only a pair's prior quarters. Model metadata records feature
+names, configuration, input digest, and fitted-artifact digest. ML output is a
+review ranking and never overrides the underlying statistical evidence.
 
 ### Signal registry
 

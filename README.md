@@ -199,6 +199,46 @@ GET /signals/openfda/<snapshot-id>?detector=proportional_reporting_ratio
 These are reporting-pattern signals for review, not causal conclusions or
 estimates of adverse-event incidence.
 
+## Phase 4 temporal ML
+
+Build quarterly features and run the reproducible temporal detectors with:
+
+```bash
+opensignal temporal \
+  --source openfda \
+  --snapshot-id demo-serious-reports-2024
+```
+
+The feature table contains report volume, reporting share,
+quarter-over-quarter growth, serious-report proportion, ROR, and PRR for every
+observed drug-event pair and represented quarter. Zero-count quarters are
+retained. A seeded Isolation Forest ranks unusual combinations, while a
+median/MAD change score compares each quarter only with that pair's prior
+history.
+
+The run writes:
+
+```text
+data/analytics/openfda/<snapshot-id>/temporal/features.jsonl
+data/analytics/openfda/<snapshot-id>/temporal/signals.jsonl
+data/analytics/openfda/<snapshot-id>/temporal/model.pkl
+data/analytics/openfda/<snapshot-id>/temporal/metadata.json
+```
+
+Metadata captures the curated-input and feature-table digests, random seed,
+hyperparameters, feature schema, and model digest. Explanations expose
+robust-scaled feature deviations; these are prioritization aids, not causal
+attributions. Model pickle files are internal artifacts and must not be loaded
+from untrusted sources.
+
+Saved results are available at:
+
+```text
+GET /temporal-signals/openfda/<snapshot-id>
+GET /temporal-signals/openfda/<snapshot-id>?anomalies_only=true
+GET /temporal-signals/openfda/<snapshot-id>?changes_only=true
+```
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.
@@ -207,5 +247,5 @@ incidence, or replace review by pharmacovigilance and clinical experts.
 
 ## Project status
 
-Early scaffold. Interfaces and schemas will evolve as the first vertical slice
-is implemented.
+Phases 0–4 are implemented. Phase 5 will add leakage-resistant, walk-forward
+backtesting against a versioned external reference set.
