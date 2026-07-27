@@ -1,4 +1,4 @@
-.PHONY: install test lint format run ingest-sample process-sample score-sample temporal-sample backtest-sample ingest-cdc process-cdc
+.PHONY: install test lint format run dashboard dashboard-test ingest-sample process-sample score-sample temporal-sample backtest-sample ingest-cdc process-cdc
 
 install:
 	python -m pip install -e ".[dev,data,ml]"
@@ -16,6 +16,12 @@ format:
 
 run:
 	uvicorn opensignal.api.main:app --reload
+
+dashboard:
+	cd dashboard && npm run dev
+
+dashboard-test:
+	cd dashboard && npm test
 
 ingest-sample:
 	opensignal ingest --manifest manifests/openfda-demo.json

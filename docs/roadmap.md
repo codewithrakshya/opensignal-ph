@@ -108,15 +108,16 @@ required before interpreting benchmark values.
 
 **Goal:** support transparent human review.
 
-- signal queue and filters;
-- trend and confidence-interval visualizations;
-- data-quality indicators;
-- detector explanations and evidence provenance;
-- downloadable, versioned analysis bundle;
-- accessible responsible-use messaging.
+- [x] signal queue and filters;
+- [x] trend and confidence-interval visualizations;
+- [x] data-quality indicators;
+- [x] detector explanations and evidence provenance;
+- [x] downloadable, versioned analysis bundle;
+- [x] accessible responsible-use messaging.
 
-**Exit criteria:** every visible result links to its method, time window, and
-source snapshot.
+**Status:** Complete. Every visible result links to its method, analysis
+quarter, source snapshot, criteria version, and uncertainty. The responsive
+portfolio deployment is explicitly labeled as a demonstration.
 
 ## Phase 7 — AI-assisted evidence briefing
 

@@ -282,6 +282,32 @@ Read a saved result through:
 GET /backtests/openfda/<snapshot-id>/<reference-set-id>
 ```
 
+## Phase 6 surveillance interface
+
+The `dashboard/` application turns the saved analytical contracts into an
+evidence-first review workspace. It includes:
+
+- a searchable, status-filtered signal queue;
+- quarterly trend and confidence-interval context;
+- transparent statistical and ML prioritization reasons;
+- source snapshot, method version, and digest provenance;
+- data-quality gates and walk-forward detector comparisons;
+- accessible responsible-use messaging;
+- a downloadable, versioned JSON analysis bundle.
+
+Run the interface locally with:
+
+```bash
+cd dashboard
+npm install
+npm run dev
+```
+
+The deployed portfolio interface uses clearly labeled realistic demonstration
+records. It is not live FDA monitoring and does not present clinical findings.
+The UI boundary is kept separate from analytics so an API adapter can replace
+the fixture data without changing the review workflow.
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.
@@ -290,5 +316,5 @@ incidence, or replace review by pharmacovigilance and clinical experts.
 
 ## Project status
 
-Phases 0–5 are implemented. Phase 6 will add a transparent surveillance
-interface for human review.
+Phases 0–6 are implemented. Phase 7 will add constrained, cited,
+AI-assisted evidence briefing without allowing generated text to alter scores.

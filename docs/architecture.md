@@ -83,8 +83,10 @@ unmatched normalization decisions remain in the versioned reference set.
 
 ### Delivery
 
-FastAPI provides health, metadata, quality, and signal endpoints. A dashboard
-will consume the API rather than query storage directly.
+FastAPI provides health, metadata, quality, signal, temporal-signal, and
+backtest endpoints. The separate `dashboard/` application implements the human
+review contract and can consume these APIs without querying analytical storage
+directly. Its deployed portfolio mode uses explicit demonstration fixtures.
 
 ## Trust boundaries
 
