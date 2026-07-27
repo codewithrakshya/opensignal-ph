@@ -1,0 +1,74 @@
+[
+  {
+    "record_id": "a",
+    "site": "100",
+    "state_territory": "ca",
+    "source": "State_Territory",
+    "sample_id": "sample-a",
+    "sample_collect_date": "2026-01-01",
+    "pcr_target": "sars-cov-2",
+    "pcr_target_avg_conc": "10.5",
+    "pcr_target_units": "copies/l wastewater",
+    "pcr_target_detect": "yes",
+    "date_updated": "2026-01-02T10:00:00.000"
+  },
+  {
+    "record_id": "a",
+    "site": "100",
+    "state_territory": "ca",
+    "source": "State_Territory",
+    "sample_id": "sample-a",
+    "sample_collect_date": "2026-01-01",
+    "pcr_target": "sars-cov-2",
+    "pcr_target_avg_conc": "12.5",
+    "pcr_target_units": "copies/l wastewater",
+    "pcr_target_detect": "yes",
+    "date_updated": "2026-01-03T10:00:00.000"
+  },
+  {
+    "record_id": "b",
+    "site": "200",
+    "state_territory": "ny",
+    "source": "CDC_Verily",
+    "county_fips": "36061",
+    "population_served": "50000",
+    "sample_id": "sample-b",
+    "sample_collect_date": "2026-01-05",
+    "pcr_target": "sars-cov-2",
+    "pcr_target_detect": "no",
+    "date_updated": "2026-01-06T10:00:00.000"
+  },
+  {
+    "record_id": "c",
+    "site": "300",
+    "state_territory": "wa",
+    "source": "State_Territory",
+    "sample_id": "sample-c",
+    "sample_collect_date": "2026-01-07",
+    "pcr_target": "sars-cov-2",
+    "pcr_target_avg_conc": "-1",
+    "date_updated": "2026-01-08T10:00:00.000"
+  },
+  {
+    "site": "400",
+    "state_territory": "or",
+    "source": "State_Territory",
+    "sample_id": "sample-d",
+    "sample_collect_date": "2026-01-09",
+    "pcr_target": "sars-cov-2",
+    "date_updated": "2026-01-10T10:00:00.000"
+  },
+  {
+    "record_id": "b",
+    "site": "200",
+    "state_territory": "ny",
+    "source": "CDC_Verily",
+    "county_fips": "36061",
+    "population_served": "50000",
+    "sample_id": "sample-b",
+    "sample_collect_date": "2026-01-05",
+    "pcr_target": "sars-cov-2",
+    "pcr_target_detect": "no",
+    "date_updated": "2026-01-06T10:00:00.000"
+  }
+]

@@ -44,6 +44,22 @@ request or duplicated pages; snapshot conflicts fail closed.
 **Status:** Complete. Every input record is accepted, superseded by a later
 follow-up, classified as an exact duplicate, or rejected with a reason.
 
+## Multi-source progression — CDC Socrata adapter
+
+**Goal:** demonstrate that the platform is reusable beyond adverse-event data.
+
+- [x] generic, bounded Socrata manifest and paging adapter;
+- [x] retry and optional application-token support;
+- [x] CDC wastewater demonstration manifest;
+- [x] typed wastewater sampling contract;
+- [x] latest-update and exact-duplicate handling;
+- [x] accepted, rejected, curated, and quality-report artifacts;
+- [x] shared source processor registry;
+- [x] explicit dataset interpretation cautions.
+
+**Status:** Complete. openFDA and CDC wastewater data now reuse platform
+infrastructure while retaining distinct scientifically appropriate schemas.
+
 ## Phase 3 — Statistical signal baseline
 
 **Goal:** produce auditable drug-event signal scores.

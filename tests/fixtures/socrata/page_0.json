@@ -1,0 +1,12 @@
+[
+  {
+    "record_id": "one",
+    "site": "100",
+    "state_territory": "ca"
+  },
+  {
+    "record_id": "two",
+    "site": "200",
+    "state_territory": "ny"
+  }
+]

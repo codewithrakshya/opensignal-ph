@@ -5,7 +5,7 @@ from opensignal.quality.registry import processor_for, supported_sources
 
 
 def test_registry_exposes_source_processor_contract(tmp_path) -> None:
-    assert supported_sources() == ("openfda",)
+    assert supported_sources() == ("cdc-wastewater", "openfda")
     assert isinstance(processor_for("openfda", tmp_path), OpenFDAQualityProcessor)
 
 

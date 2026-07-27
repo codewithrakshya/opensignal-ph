@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     openfda_api_key: str | None = None
     openfda_max_attempts: int = 4
     openfda_backoff_seconds: float = 1.0
+    socrata_app_token: str | None = None
+    socrata_max_attempts: int = 4
+    socrata_backoff_seconds: float = 1.0
     data_dir: Path = Path("data")
 
 

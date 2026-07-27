@@ -20,6 +20,15 @@ Each source adapter retrieves bounded pages, records retrieval metadata, obeys
 rate limits, and supports resumable checkpoints. Source-specific representations
 must not leak beyond the ingestion boundary.
 
+The first two adapters demonstrate different API conventions:
+
+- openFDA uses `limit` and `skip` with a nested response object;
+- Socrata uses SoQL parameters such as `$limit`, `$offset`, `$where`, and
+  `$order` and returns a list of records.
+
+Both are wrapped in the same raw-page envelope and stored through the same
+source-neutral snapshot and checkpoint service.
+
 ### Data layers
 
 - **Raw:** immutable source payloads plus retrieval metadata.
@@ -39,6 +48,11 @@ available to both the API and dashboard.
 Source processors implement a shared snapshot-processing protocol and are
 selected through a registry. Adding another source requires an adapter and
 registration; it does not require changes to the CLI or artifact layout.
+
+OpenFDA produces report–drug–event rows for safety-signal analysis. CDC
+wastewater data produces site–sample–pathogen observations. They deliberately
+do not share a forced analytical schema; the platform contract is shared while
+the scientific grain remains explicit.
 
 ### Detector interface
 

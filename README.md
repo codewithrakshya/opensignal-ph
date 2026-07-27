@@ -139,6 +139,33 @@ data/quality/openfda/<snapshot-id>/
 Snapshot storage now accepts a source identifier, so additional adapters can
 reuse the same integrity, checkpoint, and directory contracts.
 
+## CDC wastewater source
+
+OpenSignal PH also supports the CDC National Wastewater Surveillance System
+dataset through a reusable Socrata adapter:
+
+```bash
+opensignal ingest-socrata \
+  --manifest manifests/cdc-wastewater-demo.json
+
+opensignal process \
+  --source cdc-wastewater \
+  --snapshot-id cdc-wastewater-sarscov2-2026-demo
+```
+
+This second source reuses the platform's manifest digest, bounded pagination,
+immutable snapshots, checkpoint integrity, accepted/rejected artifacts, source
+registry, and quality-report conventions.
+
+Its analytical contract remains dataset-specific. Wastewater processing
+validates sampling identifiers and dates, keeps the latest source update for
+each record, normalizes pathogen and geographic fields, and rejects negative
+concentrations. Quality reports explicitly warn against directly comparing
+concentrations across sites with different collection and laboratory methods.
+
+The demonstration manifest is capped at 5,000 records and selects only fields
+used by the current typed contract.
+
 ## Responsible-use statement
 
 OpenSignal PH identifies reporting patterns that may warrant further review.

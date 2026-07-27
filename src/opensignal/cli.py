@@ -9,6 +9,9 @@ from opensignal.core.config import get_settings
 from opensignal.ingestion.manifest import IngestionManifest
 from opensignal.ingestion.openfda import OpenFDAClient
 from opensignal.ingestion.runner import OpenFDAIngestionRunner
+from opensignal.ingestion.socrata import SocrataClient
+from opensignal.ingestion.socrata_manifest import SocrataManifest
+from opensignal.ingestion.socrata_runner import SocrataIngestionRunner
 from opensignal.ingestion.storage import RawSnapshotStore
 from opensignal.quality.registry import processor_for, supported_sources
 
@@ -22,6 +25,16 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         required=True,
         help="Path to a versioned ingestion manifest",
+    )
+    socrata = commands.add_parser(
+        "ingest-socrata",
+        help="Run a bounded Socrata ingestion",
+    )
+    socrata.add_argument(
+        "--manifest",
+        type=Path,
+        required=True,
+        help="Path to a versioned Socrata ingestion manifest",
     )
     process = commands.add_parser(
         "process",
@@ -54,6 +67,29 @@ async def ingest(manifest_path: Path) -> int:
     return 0
 
 
+async def ingest_socrata(manifest_path: Path) -> int:
+    settings = get_settings()
+    manifest = SocrataManifest.from_path(manifest_path)
+    client = SocrataClient(
+        manifest.domain,
+        manifest.dataset_id,
+        app_token=settings.socrata_app_token,
+        max_attempts=settings.socrata_max_attempts,
+        backoff_seconds=settings.socrata_backoff_seconds,
+    )
+    runner = SocrataIngestionRunner(
+        client=client,
+        store=RawSnapshotStore(
+            settings.data_dir,
+            manifest.snapshot_id,
+            source=manifest.source,
+        ),
+    )
+    result = await runner.run(manifest)
+    print(json.dumps(asdict(result), sort_keys=True))
+    return 0
+
+
 def process(source: str, snapshot_id: str) -> int:
     settings = get_settings()
     result = processor_for(source, settings.data_dir).process(snapshot_id)
@@ -65,6 +101,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "ingest":
         return asyncio.run(ingest(args.manifest))
+    if args.command == "ingest-socrata":
+        return asyncio.run(ingest_socrata(args.manifest))
     if args.command == "process":
         return process(args.source, args.snapshot_id)
     raise AssertionError(f"Unhandled command: {args.command}")

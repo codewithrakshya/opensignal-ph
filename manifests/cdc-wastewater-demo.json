@@ -1,0 +1,12 @@
+{
+  "manifest_version": 1,
+  "source": "cdc-wastewater",
+  "snapshot_id": "cdc-wastewater-sarscov2-2026-demo",
+  "domain": "data.cdc.gov",
+  "dataset_id": "j9g8-acpt",
+  "page_size": 1000,
+  "max_records": 5000,
+  "where": "sample_collect_date >= '2026-01-01T00:00:00.000'",
+  "order": "sample_collect_date,record_id",
+  "select": "record_id,site,state_territory,source,county_fips,population_served,sample_id,sample_collect_date,pcr_target,pcr_target_avg_conc,pcr_target_units,pcr_target_detect,date_updated"
+}
